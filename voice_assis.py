@@ -13,8 +13,9 @@ engine.setProperty('voice', voices[1].id)
 
 #This dictionary contains email addresses of your important contacts and is used to send email
 Dict = {
-    'person1' : 'person1_email@gmail.com',
-    'person2' : 'person2_email@gmail.com'
+    'Person1' : 'person1_email@gmail.com',
+    'Person2' : 'person2_email@gmail.com',
+    'Person3' : 'person3_email@gmail.com'
 }
 
 def speak(audio):
@@ -58,10 +59,10 @@ def sendEmail(to, content):
     server.ehlo()
     server.starttls()
 
-    server.login('your_email@gmail.com', 'your_password') 
+    server.login('your_email,'your_password') 
     # Your email address and password is to be filled here, which is ommitted as of now due to security reasons
 
-    server.sendmail('your_email@gmail.com', to, content)
+    server.sendmail('your_email', to, content)
     # Your email address is to be filled here, which is ommitted as of now due to security reasons
 
     server.close()
@@ -78,54 +79,97 @@ if __name__ == "__main__":
             speak("According to Wikipedia")
             print(results)
             speak(results)
+ 
+        elif 'bye' in query:
+            speak("Bye! Hoping To see you again sir")
+            break;
 
         elif 'open youtube' in query:
+            if 'please' in query:
+                speak("Sure sir")
+            speak("Opening YouTube")
             webbrowser.open("youtube.com")
 
         elif 'open google' in query:
+            if 'please' in query:
+                speak("Sure sir")
+            speak("Opening Google")
             webbrowser.open("google.com")
 
         elif 'open gmail' in query:
+            if 'please' in query:
+                speak("Sure sir")
+            speak("Opening Gmail")
             webbrowser.open("gmail.com")
 
         elif 'open stackoverflow' in query:
+            if 'please' in query:
+                speak("Sure sir")
+            speak("Opening sTackoverflow")
             webbrowser.open("stackoverflow.com")   
 
         elif 'open github' in query:
+            if 'please' in query:
+                speak("Sure sir")
+            speak("Opening GiThub")
             webbrowser.open("github.com")
 
         elif 'open interviewbit' in query:
+            if 'please' in query:
+                speak("Sure sir")
+            speak("Opening InTerviewbiT")
             webbrowser.open("interviewbit.com")
 
         elif 'open overleaf' in query:
+            if 'please' in query:
+                speak("Sure sir")
+            speak("Opening Overleaf")
             webbrowser.open("overleaf.com")
 
         elif 'open mandi' in query:
+            if 'please' in query:
+                speak("Sure sir")
+            speak("Opening IIT Mandi websiTe")
             webbrowser.open("iitmandi.ac.in")
 
         elif 'play music' in query:
+            if 'please' in query:
+                speak("Sure sir")
+            speak("Playing music")
             music_dir = 'VOICE ASSISSTANT/Music'
             songs = os.listdir(music_dir)
-            a=random.randint(0,len(songs)) 
+            a=random.randint(0,len(songs)-1) 
             os.startfile(os.path.join(music_dir, songs[a]))
 
         elif 'the time' in query:
+            if 'please' in query:
+                speak("Sure sir")
             strTime = datetime.datetime.now().strftime("%H:%M:%S")    
             speak(f"Sir, the time is {strTime}")
 
         elif 'email to' in query:
+            if 'please' in query:
+                speak("Sure sir")
             try:
                 speak("What should I say?")
                 content = takeCommand()
                 if 'person1' in query:
-                    to = Dict['person1'] #This is the email of the person whom email is to be sent
+                    to = Dict['Person1'] #This is the email of the person whom email is to be sent
                     sendEmail(to, content)
                     speak("Email has been sent!")   
                 elif 'person2' in query:
-                    to = Dict['person2'] #This is the email of the person whom email is to be sent
+                    to = Dict['Person2'] #This is the email of the person whom email is to be sent
                     sendEmail(to, content)
                     speak("Email has been sent!")
+                elif 'person3' in query:
+                    to = Dict['Person3'] #This is the email of the person whom email is to be sent
+                    sendEmail(to, content)
+                    speak("Email has been sent!")
+                else:
+                    speak("Not in the list sir!")
             except Exception as e:
                 speak("Sorry! Unable to do that as of now.")  
+        elif 'thank you' in query:
+            speak("your most welcome")
         else:
-            speak("I don't understand") 
+            speak("Sorry! I don't understand") 
